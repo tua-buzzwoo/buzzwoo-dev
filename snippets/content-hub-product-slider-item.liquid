@@ -1,0 +1,10 @@
+<div class="article-item">
+  <a href="{{ product.url }}" class="article-link">
+    <div class="article-img">
+    {{ product.featured_image | image_url: width: 300 | image_tag: height: 300 }}
+    </div>
+    <div class="article-title">
+      {{ product.title }}
+    </div>
+  </a>
+</div>

@@ -1,0 +1,134 @@
+<style>
+    {% if block.settings.heading_color %}
+    .content-hub-item.topic .heading {
+        color: {{ block.settings.heading_color }};
+    }
+    {% endif %}
+
+    {% if block.settings.title_color %}
+        .content-hub-item.topic .topic-title {
+            color: {{ block.settings.title_color }};
+        }
+    {% endif %}
+
+    {% if block.settings.text_color %}
+        .content-hub-item.topic .topic-content {
+            color: {{ block.settings.text_color }};
+        }
+    {% endif %}
+
+    .content-hub-item.topic .topic-link a {
+        color: {{ block.settings.link_color }};
+    }
+    .content-hub-item.topic .topic-link a svg path {
+        fill: {{ block.settings.link_color }};
+    }
+
+    .content-hub-item.topic .topic-item {}
+</style>
+
+<div class="content-hub-item  {% if block.settings.is_border %}border-item{% endif %} topic block-{{ index }}" {% if block.settings.anchor != blank %} id="{{ block.settings.anchor }}" {% endif %} style="background-color: {{ block.settings.background }};">
+  {% if block.settings.heading %}
+    <{{block.settings.heading_tag}} class="{{ block.settings.headline_style }} heading">
+      {{ block.settings.heading }}
+    </{{block.settings.heading_tag}}>
+  {% endif %}
+  <div class="topics">
+
+    {% if block.settings.topic_1 != blank %}
+      <div class="topic-item">
+        <div class="topic-title">
+          {{ block.settings.topic_1 }}
+        </div>
+        <div class="topic-content">
+          {{ block.settings.description_1 }}
+        </div>
+        {% if block.settings.link_1 %}
+          <div class="topic-link">
+            <a href="{{ block.settings.link_1 }}">
+              <span>{{ block.settings.link_text }}</span>
+              {% render 'arrow-down' %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.topic_2 != blank %}
+      <div class="topic-item">
+        <div class="topic-title">
+          {{ block.settings.topic_2 }}
+        </div>
+        <div class="topic-content">
+          {{ block.settings.description_2 }}
+        </div>
+        {% if block.settings.link_2 %}
+          <div class="topic-link">
+            <a href="{{ block.settings.link_2 }}">
+              <span>{{ block.settings.link_text }}</span>
+              {% render 'arrow-down' %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.topic_3 != blank %}
+      <div class="topic-item">
+        <div class="topic-title">
+          {{ block.settings.topic_3 }}
+        </div>
+        <div class="topic-content">
+          {{ block.settings.description_3 }}
+        </div>
+        {% if block.settings.link_3 %}
+          <div class="topic-link">
+            <a href="{{ block.settings.link_3 }}">
+              <span>{{ block.settings.link_text }}</span>
+              {% render 'arrow-down' %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.topic_4 != blank %}
+      <div class="topic-item">
+        <div class="topic-title">
+          {{ block.settings.topic_4 }}
+        </div>
+        <div class="topic-content">
+          {{ block.settings.description_4 }}
+        </div>
+        {% if block.settings.link_4 %}
+          <div class="topic-link">
+            <a href="{{ block.settings.link_4 }}">
+              <span>{{ block.settings.link_text }}</span>
+              {% render 'arrow-down' %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.topic_5 != blank %}
+      <div class="topic-item">
+        <div class="topic-title">
+          {{ block.settings.topic_5 }}
+        </div>
+        <div class="topic-content">
+          {{ block.settings.description_5 }}
+        </div>
+        {% if block.settings.link_5 %}
+          <div class="topic-link">
+            <a href="{{ block.settings.link_5 }}">
+              <span>{{ block.settings.link_text }}</span>
+              {% render 'arrow-down' %}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+</div>

@@ -1,0 +1,147 @@
+{{ 'blog-template.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="section-{{ section.id }}" class="main-blog section-{{ section.id }}-padding" data-section-id="{{ section.id }}" data-section-type="article-list">
+
+  <div class="blog">
+    <div class="{{ section.settings.container_class }}">
+      <header class="page-header">
+        <div class="section-header">
+          <h1 class="title--primary">
+            {% if current_tags %}
+              {{- current_tags -}}
+            {% else %}
+              {{- blog.title -}}
+            {% endif %}
+          </h1>
+
+          {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+            <ul class="blog__taglist">
+              <li class="blog__taglist-item">
+                <a href="/blogs/{{ blog.handle }}" class="full-unstyled-link {% if current_tags == blank %}is-active{% endif %}">All</a>
+              </li>
+
+              {%- for tag in blog.all_tags -%}
+                <li class="blog__taglist-item">
+                  <a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handle }}" class="full-unstyled-link {% if current_tags contains tag %}is-active{% endif %}">{{ tag }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </header>
+
+      {% if linklists.blogs.links %}
+      <div class="blog-categories">
+          {% if section.settings.blog_overview_title != blank %}
+            <a class="blog-categories--item" href="{{ section.settings.blog_overview.url }}" title="All">
+              <span class="blog-categories--category">{{ section.settings.blog_overview_title }}</span>
+            </a>
+          {% endif %}
+
+          {% for link in linklists.blogs.links %}
+              <a class="blog-categories--item {% if link.handle == blog.handle %}selected{% endif %}" href="{{ link.url }}" title="{{ link.title | capitalize }}">
+                  <span class="blog-categories--category">{{ link.title | capitalize }}</span>
+              </a>
+          {% endfor %}
+      </div>
+      {% endif %}
+
+      {%- if blog.articles_count == 0 -%}
+
+      <div class="empty-state">
+          <h2 class="title--primary">Blog {{ blog.title }} is empty</h2>
+      </div>
+
+      {%- else -%}
+      
+        {%-  assign articles_per_page = 12 -%}
+
+        {% if blog.articles.size > 0 %}
+          {%- paginate blog.articles by articles_per_page -%}
+
+            <div class="article-list__wrapper">
+              <div class="article-list__row row">
+                {%- for article in blog.articles -%}
+                  <div class="col-12 col-sm-6 col-md-4">
+                    {%- render 'article-item', article: article -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+
+            {%- render 'pagination', paginate: paginate -%}
+          {%- endpaginate -%}
+        {% endif %}
+
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Blog Overview"
+    },
+    {
+      "type": "text",
+      "id": "blog_overview_title",
+      "label": "Title",
+      "default": "All"
+    },
+    {
+      "type": "page",
+      "id": "blog_overview",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "container_class",
+      "label": "Container Class",
+      "default": "page-width"
+    }
+  ]
+}
+{% endschema %}

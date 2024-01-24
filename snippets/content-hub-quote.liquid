@@ -1,0 +1,10 @@
+<div class="content-hub-item content block-{{ index }}" {% if block.settings.anchor != blank %} id="{{ block.settings.anchor }}" {% endif %}>
+  {% if block.settings.show_heading %}
+    <{{block.settings.heading_tag}} class="{{ block.settings.headline_style }}">
+      {{ block.settings.headline }}
+    </{{block.settings.heading_tag}}>
+  {% endif %}
+  <div class="text">
+    {{ block.settings.text }}
+  </div>
+</div>

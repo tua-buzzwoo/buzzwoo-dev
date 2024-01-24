@@ -1,0 +1,36 @@
+<style>
+  .content-hub-item.article-slider .article-title {
+      color: {{ block.settings.product_text_color }};
+  }
+</style>
+
+<div class="content-hub-item article-slider block-{{ index }}" {% if block.settings.anchor != blank %} id="{{ block.settings.anchor }}" {% endif %}>
+  
+{% if block.settings.heading %}
+  <{{block.settings.heading_tag}} class="{{ block.settings.headline_style }} heading">
+    {{ block.settings.heading }}
+  </{{block.settings.heading_tag}}>
+{% endif %}
+
+<div class="article-items">
+  {% if block.settings.collection != blank %}
+    {% for product in block.settings.collection.products limit: 8 %}
+      {% render 'content-hub-product-slider-item', product: product %}
+    {% endfor %}
+  {% else %}
+    {% for num in (1..5) %}
+      <div class="article-item">
+        <a class="article-link" href="#">
+          <div class="article-img">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+          </div>
+          <div class="article-title">
+            Product
+            {{ num }}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+</div>

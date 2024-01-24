@@ -1,0 +1,155 @@
+{{ 'blog-template.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="section-{{ section.id }}"
+  class="main-blog section-{{ section.id }}-padding"
+  data-section-id="{{ section.id }}"
+  data-section-type="article-list"
+>
+  <div class="blog">
+    <div class="{{ section.settings.container_class }}">
+      <header class="page-header">
+        <div class="section-header">
+          <{{ section.settings.heading_tag }} class="title--primary">
+            {% if section.settings.blog_overview_page_title %}
+              {{- section.settings.blog_overview_page_title -}}
+            {% endif %}
+          </{{ section.settings.heading_tag }}>
+
+          {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+            <ul class="blog__taglist">
+              <li class="blog__taglist-item">
+                <a
+                  href="/blogs/{{ blog.handle }}"
+                  class="full-unstyled-link {% if current_tags == blank %}is-active{% endif %}"
+                  >All</a
+                >
+              </li>
+
+              {%- for tag in blog.all_tags -%}
+                <li class="blog__taglist-item">
+                  <a
+                    href="/blogs/{{ blog.handle }}/tagged/{{ tag | handle }}"
+                    class="full-unstyled-link {% if current_tags contains tag %}is-active{% endif %}"
+                  >
+                    {{- tag -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </header>
+
+      {% if linklists.blogs.links %}
+        <div class="blog-categories">
+          <a
+            class="blog-categories--item {% if template contains 'blog-overview' %}selected{% endif %}"
+            href="#"
+            title="All"
+          >
+            <span class="blog-categories--category">{{ section.settings.blog_overview_title }}</span>
+          </a>
+
+          {% for link in linklists.blogs.links %}
+            <a
+              class="blog-categories--item {% if link.handle == blog.handle %}selected{% endif %}"
+              href="{{ link.url }}"
+              title="{{ link.title | capitalize }}"
+            >
+              <span class="blog-categories--category">{{ link.title | capitalize }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {%- if blog.articles_count == 0 -%}
+        <div class="empty-state">
+          <h2 class="title--primary">Blog {{ blog.title }} is empty</h2>
+        </div>
+
+      {% else %}
+        {% for block in section.blocks %}
+          {% if block.type == '' %}
+          {% endif %}
+        {% endfor %}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog overview page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Blog Overview"
+    },
+    {
+      "type": "text",
+      "id": "blog_overview_page_title",
+      "label": "Page Title",
+      "default": "All"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "text",
+      "id": "blog_overview_title",
+      "label": "Menu Title",
+      "default": "All"
+    },
+    {
+      "type": "text",
+      "id": "container_class",
+      "label": "Container Class",
+      "default": "page-width"
+    }
+  ]
+}
+{% endschema %}

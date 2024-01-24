@@ -1,0 +1,244 @@
+{
+  "sections": {
+    "164734266795a5d840": {
+      "type": "content-hub",
+      "blocks": {
+        "8f9ac534-1651-4254-b897-e70ea2ce3258": {
+          "type": "content",
+          "settings": {
+            "anchor": "",
+            "headline": "Content",
+            "heading_tag": "h2",
+            "sub_headline": "",
+            "text": "<p>Donec sollicitudin molestie malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Pellentesque in ipsum id orci porta dapibus. <\/p>",
+            "show_heading": true,
+            "is_quote": false,
+            "quote_style": "1",
+            "quote_color": "#000000",
+            "background": "rgba(0,0,0,0)",
+            "is_border": false
+          }
+        },
+        "d66fa52c-cd23-4198-9130-fde45c8bdcd5": {
+          "type": "content",
+          "settings": {
+            "anchor": "",
+            "headline": "Content (Quote)",
+            "heading_tag": "h2",
+            "sub_headline": "",
+            "text": "<p>Proin eget tortor risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur aliquet quam id dui posuere blandit. Pellentesque in ipsum id orci porta dapibus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.<\/p>",
+            "show_heading": true,
+            "is_quote": true,
+            "quote_style": "1",
+            "quote_color": "#000000",
+            "background": "rgba(0,0,0,0)",
+            "is_border": false
+          }
+        },
+        "19dc7e9b-5cda-4b07-a1e9-761d4bb41e03": {
+          "type": "content",
+          "settings": {
+            "anchor": "",
+            "headline": "",
+            "heading_tag": "h2",
+            "sub_headline": "",
+            "text": "<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada. Sed porttitor lectus nibh.<\/p>",
+            "show_heading": false,
+            "is_quote": true,
+            "quote_style": "2",
+            "quote_color": "#000000",
+            "background": "rgba(0,0,0,0)",
+            "is_border": false
+          }
+        },
+        "6cbb5d5b-2de4-408d-85b5-350c051f44ac": {
+          "type": "bullet",
+          "settings": {
+            "bullet_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "bullet_2": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla quis lorem ut libero malesuada feugiat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
+            "bullet_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
+            "bullet_4": "",
+            "bullet_5": "",
+            "bullet_6": "",
+            "bullet_7": "",
+            "bullet_8": ""
+          }
+        },
+        "a8053443-5f0d-47bf-a600-4972eba6d2fb": {
+          "type": "page-content",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "5360aaa2-ea85-4919-bfea-c2a9e8c3bed0": {
+          "type": "image",
+          "settings": {
+            "anchor": "image",
+            "text": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.",
+            "text_align": "center"
+          }
+        },
+        "c1b1e170-90f8-4f7d-af8e-6ed10f330179": {
+          "type": "video",
+          "settings": {
+            "anchor": "",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=GtDPjlUToKU"
+          }
+        },
+        "afddae18-5e44-4185-adad-c513c312ebfc": {
+          "type": "banner",
+          "settings": {
+            "anchor": "",
+            "headline": "Banner",
+            "heading_tag": "h2",
+            "text": "<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.<\/p>",
+            "button_text": "",
+            "button_link": "",
+            "image_position": "right",
+            "background": "rgba(0,0,0,0)",
+            "button_text_color": "#ffffff",
+            "button_color": "#000000",
+            "is_border": false
+          }
+        },
+        "8eca6116-7f5e-4516-b153-d4410e249f59": {
+          "type": "newsletter",
+          "settings": {
+            "headline": "Get our newsletter",
+            "heading_tag": "h2",
+            "headline_style": "h2",
+            "anchor": "",
+            "text": "",
+            "newsletter_code": "",
+            "background": "#f3f3f3",
+            "is_border": false
+          }
+        },
+        "cf1b061c-9818-4776-b3cd-314327ef89bd": {
+          "type": "topic",
+          "settings": {
+            "anchor": "",
+            "heading": "Topics",
+            "heading_tag": "h2",
+            "topic_1": "Topic#1",
+            "description_1": "<p>Curabitur aliquet quam id dui posuere blandit. Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.<\/p>",
+            "link_1": "#",
+            "topic_2": "Topic#2",
+            "description_2": "<p>Curabitur aliquet quam id dui posuere blandit. Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.<\/p>",
+            "link_2": "#",
+            "topic_3": "Topic#3",
+            "description_3": "<p>Curabitur aliquet quam id dui posuere blandit. Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.<\/p>",
+            "link_3": "#",
+            "topic_4": "",
+            "description_4": "",
+            "link_4": "",
+            "topic_5": "",
+            "description_5": "",
+            "link_5": "",
+            "heading_color": "",
+            "title_color": "",
+            "text_color": "",
+            "border_color": "#000000",
+            "background": "rgba(0,0,0,0)",
+            "link_text": "Mehr erfahren",
+            "link_color": "#000000",
+            "is_border": false
+          }
+        },
+        "3e5a8421-9c98-4aa1-ac40-58632e3623f7": {
+          "type": "article_slider",
+          "settings": {
+            "anchor": "",
+            "heading": "Article Slider",
+            "heading_tag": "h3",
+            "article_1": "",
+            "article_2": "",
+            "article_3": "",
+            "article_4": "",
+            "article_5": "",
+            "article_6": "",
+            "article_7": "",
+            "article_8": "",
+            "article_text_color": "#ffffff"
+          }
+        },
+        "7d5d75fa-06d1-41ba-82ed-da85071ae7de": {
+          "type": "image_slider",
+          "settings": {
+            "anchor": "",
+            "text_1": "",
+            "text_2": "",
+            "text_3": "",
+            "text_4": "",
+            "text_5": "",
+            "text_6": "",
+            "text_7": "",
+            "text_8": ""
+          }
+        },
+        "4a5328c8-3567-4c70-900e-6c1af71cb6f7": {
+          "type": "html",
+          "settings": {
+            "anchor": "",
+            "html": "<h2>This is HTML H2!<\/h2>\n<p>HTML p tag content.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "8f9ac534-1651-4254-b897-e70ea2ce3258",
+        "d66fa52c-cd23-4198-9130-fde45c8bdcd5",
+        "19dc7e9b-5cda-4b07-a1e9-761d4bb41e03",
+        "6cbb5d5b-2de4-408d-85b5-350c051f44ac",
+        "a8053443-5f0d-47bf-a600-4972eba6d2fb",
+        "5360aaa2-ea85-4919-bfea-c2a9e8c3bed0",
+        "c1b1e170-90f8-4f7d-af8e-6ed10f330179",
+        "afddae18-5e44-4185-adad-c513c312ebfc",
+        "8eca6116-7f5e-4516-b153-d4410e249f59",
+        "cf1b061c-9818-4776-b3cd-314327ef89bd",
+        "3e5a8421-9c98-4aa1-ac40-58632e3623f7",
+        "7d5d75fa-06d1-41ba-82ed-da85071ae7de",
+        "4a5328c8-3567-4c70-900e-6c1af71cb6f7"
+      ],
+      "settings": {
+        "menu_title": "Inhaltsübersicht",
+        "menu": "main-menu",
+        "menu_background_color": "rgba(0,0,0,0)",
+        "menu_text_color": "#000000",
+        "menu_active_color": "#fafafa",
+        "sidebar_background_color": "#fafafa",
+        "sidebar_active_color": "#000000",
+        "is_border": false,
+        "padding_top": false,
+        "padding_bottom": true,
+        "theme_width_class": "page-width",
+        "custom_css": ""
+      }
+    },
+    "1648021090865ef155": {
+      "type": "content-hub-sticky-end",
+      "settings": {
+      }
+    },
+    "1659681591e41c8c47": {
+      "type": "content-hub-banner",
+      "settings": {
+        "headline": "Heading",
+        "heading_tag": "h2",
+        "text": "<p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.<\/p>",
+        "button_text": "",
+        "button_link": "",
+        "image_position": "right",
+        "background": "rgba(0,0,0,0)",
+        "button_text_color": "#ffffff",
+        "button_color": "#000000",
+        "is_border": false,
+        "is_rounded": false
+      }
+    }
+  },
+  "order": [
+    "164734266795a5d840",
+    "1648021090865ef155",
+    "1659681591e41c8c47"
+  ]
+}

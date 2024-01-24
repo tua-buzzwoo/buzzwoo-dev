@@ -1,0 +1,1348 @@
+{{ 'main-article-template.css' | asset_url | stylesheet_tag }}
+
+<article class="main-article-template article-template" itemscope itemtype="http://schema.org/BlogPosting">
+    {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+            {%- when '@app' -%}
+                <div class="page-width page-width--narrow">
+                {% render block %}
+                </div>
+
+            {%- when 'featured_image' -%}
+                {%- if article.image -%}
+                <div class="article-template__hero-container" {{ block.shopify_attributes }}>
+                    <div class="article-template__hero" itemprop="image">
+                        <img
+                            srcset="
+                            {% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
+                            {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
+                            {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
+                            {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
+                            {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}
+                            {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
+                            {{ article.image | image_url }} {{ article.image.width }}w
+                            "
+                            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                            src="{{ article.image | image_url: width: 1100 }}"
+                            loading="lazy"
+                            width="{{ article.image.width }}"
+                            height="{{ article.image.height }}"
+                            alt="{{ article.image.alt | escape }}"
+                        >
+                    </div>
+
+                    <div class="article-template__title-wrapper {% if block.settings.show_title == true %}overlay{% endif %}">
+                        <header class="article-template__header" {{ block.shopify_attributes }}>
+                            <h1 class="article-template__title" itemprop="headline" {% if block.settings.title_size != blank %}style="font-size: {{ block.settings.title_size }};"{% endif %}>{{ article.title | escape }}</h1>
+                        </header>
+                    </div>
+                </div>
+                {%- endif -%}
+
+        {%- endcase -%}
+    {%- endfor -%}
+
+    <div class="article-template__container">
+        <div class="article-template__main-content {% if section.settings.show_sidebar %}has-sidebar{% endif %}">
+
+            {%- if section.settings.show_sidebar -%}
+                <div class="article-template__sidebar">
+                    <aside class="article-template__blog-sidebar">
+                        {% for block in section.blocks %}
+                            {% case block.type %}
+                                {% when 'teaser-with-link' %}
+                                    <div class="article-template__sidebar-teaser-with-link block-{{ block.id }}">
+
+                                        <div class="box">
+                                            {%- if block.settings.image -%}
+                                            <div class="image">
+                                                <img
+                                                    srcset="
+                                                    {% if block.settings.image.width >= 350 %}{{ block.settings.image | image_url: width: 350 }} 350w,{% endif %}
+                                                    {% if block.settings.image.width >= 750 %}{{ block.settings.image | image_url: width: 750 }} 750w,{% endif %}
+                                                    {% if block.settings.image.width >= 1100 %}{{ block.settings.image | image_url: width: 1100 }} 1100w,{% endif %}
+                                                    {% if block.settings.image.width >= 1500 %}{{ block.settings.image | image_url: width: 1500 }} 1500w,{% endif %}
+                                                    {% if block.settings.image.width >= 2200 %}{{ block.settings.image | image_url: width: 2200 }} 2200w,{% endif %}
+                                                    {% if block.settings.image.width >= 3000 %}{{ block.settings.image | image_url: width: 3000 }} 3000w,{% endif %}
+                                                    {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                                                    "
+                                                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                                                    src="{{ block.settings.image | image_url: width: '300x300' }}"
+                                                    loading="lazy"
+                                                    width="{{ block.settings.image.width }}"
+                                                    height="{{ block.settings.image.height }}"
+                                                    alt="{{ block.settings.image.alt | escape }}"
+                                                >
+                                            </div>
+                                            {%- endif -%}
+
+                                            <div class="text {% if block.settings.show_endline %}has-line{% endif %}">
+
+                                                {%- if block.settings.title != blank -%}
+                                                    <h3 class="title h6">{{ block.settings.title | escape }}</h3>
+                                                {%- endif -%}
+
+                                                <div class="content">
+                                                    {{ block.settings.content }}
+                                                </div>
+
+                                                {%- if block.settings.button_text != blank -%}
+                                                    <a href="{{ block.settings.button_link }}" class="button button--primary">{{ block.settings.button_text | escape }}</a>
+                                                {%- endif -%}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                {% when 'menu' %}
+
+                                    <div class="article-template__sidebar-menu block-{{ block.id }} {% if block.settings.show_endline %}has-line{% endif %}">
+                                        {% assign sidebar_menu = linklists[block.settings.custom_menu_linklist] %}
+                                        {% if sidebar_menu != blank %}
+                                        <summary>
+                                            <h4 class="sidebar-block__heading">{{ sidebar_menu.title }}<span class="right icon-down-arrow sidebar-block-toggle-icon"></span></h4>
+                                        </summary>
+                                        <ul class="toggle_list">
+                                            {% for link in sidebar_menu.links %}
+                                            {% if link.active %}
+                                                {% assign active_link = true %}
+                                            {% else %}
+                                                {% assign active_link = false %}
+                                                {% for sub_link in linklists[link.handle].links %}
+                                                {% if sub_link.active %}
+                                                    {% assign active_link = true %}
+                                                {% else %}
+                                                    {% for sub_sub_link in linklists[sub_link.handle].links %}
+                                                    {% if sub_sub_link.active %}
+                                                        {% assign active_link = true %}
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+
+                                            <li>
+                                                {% if link.url == 'http://' or link.url == '' or link.url == '/' or link.url == 'https://' or link.url == '#' %}
+                                                <a data-no-instant href="{{ link.url }}" class="{% if link.active %}active{% endif %} parent-link--false">
+                                                    {{ link.title }}
+                                                </a>
+                                                {% else %}
+                                                <a data-no-instant href="{{ link.url }}" class="{% if link.active %}active{% endif %} parent-link--true">
+                                                {{ link.title }}
+                                                </a>
+                                                {% endif %}
+
+                                                {% if linklists[link.handle].links != blank %}
+                                                <span class="menu-toggle icon-down-arrow {% if active_link %}active{% endif %}" aria-haspopup="true" aria-expanded="{% if active_link %}true{% else %}false{% endif %}"> </span>
+
+                                                <ul class="{% if active_link %}active{% endif %}">
+                                                    {% for sub_link in linklists[link.handle].links %}
+                                                    {% if sub_link.active %}
+                                                        {% assign active_link = true %}
+                                                    {% else %}
+                                                        {% assign active_link = false %}
+                                                        {% for sub_sub_link in linklists[sub_link.handle].links %}
+                                                        {% if sub_sub_link.active %}
+                                                            {% assign active_link = true %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+
+                                                    <li class="sub-menu {% if active_link %}active{% endif %}">
+                                                        <a {% if sub_link.active %}class="active"{% endif %} href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+                                                        {% if linklists[sub_link.handle].links != blank %}
+                                                        <span class="menu-toggle icon-down-arrow {% if active_link %}active{% endif %}" aria-haspopup="true" aria-expanded="{% if active_link %}true{% else %}false{% endif %}"> </span>
+
+                                                        <ul class="{% if active_link %}active{% endif %}">
+                                                            {% for sub_sub_link in linklists[sub_link.handle].links %}
+                                                            <li class="sub-menu">
+                                                                <a {% if sub_sub_link.active %}class="active"{% endif %} href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                                                            </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        {% endif %}
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% endif %}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </div>
+
+                                {% when 'search' %}
+
+                                    <div class="article-template__sidebar-search block-{{ block.id }} {% if block.settings.show_endline %}has-line{% endif %}">
+                                        <div data-autocomplete-{{ settings.enable_autocomplete }}>
+                                            <form class="blog_search search__form" action="{{ routes.search_url }}">
+                                                <input type="hidden" name="type" value="article" />
+                                                <button type="submit" class="icon-search search-submit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"/></svg>
+                                                </button>
+                                                <input type="text" name="q" class="search_box" placeholder="{{ block.settings.search_label }}" autocapitalize="off" autocomplete="off" autocorrect="off" value="{{ search.terms }}" />
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                {% when 'newsletter' %}
+
+                                    <div class="article-template__sidebar-newsletter block-{{ block.id }} {% if block.settings.show_endline %}has-line{% endif %}">
+
+                                        {% if block.settings.newsletter_title != blank %}
+                                        <h4 class="sidebar-block__heading">{{ block.settings.newsletter_title }}</h4>
+                                        {% endif %}
+                                        {% if block.settings.newsletter_text != blank %}
+                                        <div class="newsletter-block__text">{{ block.settings.newsletter_text }}</div>
+                                        {% endif %}
+
+                                        <div class="newsletter">
+                                            <div>
+                                            <span class="message"></span>
+                                            {% if block.settings.mailchimp_link != blank %}
+                                                <form action="{{ block.settings.mailchimp_link }}" method="post" name="mc-embedded-subscribe-form" id="contact_form" target="_blank">
+                                                <div class="input-row">
+                                                    {% if block.settings.display_first_name %}
+                                                    <input type="text" value="" class="firstName" name="FNAME" placeholder="{{ block.settings.first_name_label }}">
+                                                    {% endif %}
+                                                    {% if block.settings.display_last_name %}
+                                                    <input type="text" value="" name="LNAME" placeholder="{{ block.settings.last_name_label }}">
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="input-row">
+                                                    <input type="email" value="" name="EMAIL" class="contact_email" placeholder="{{ block.settings.email_label }}">
+                                                    <input type="submit" value="{{ block.settings.submit_button }}" class="global-button global-button--primary newsletter-form__sign-up" name="subscribe" />
+                                                </div>
+                                                </form>
+                                            {% else %}
+                                                {% form 'customer' %}
+                                                {% if form.posted_successfully? %}
+                                                    <p><em>{{ block.settings.last_nameposted_successfully_label }}</em></p>
+                                                {% elsif form.errors %}
+                                                    {% for field in form.errors %}
+                                                    <p><em>{{ field }} - {{ form.errors.messages[field] }}</em></p>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                                <input type="hidden" name="contact[tags]" value="prospect,newsletter"/>
+                                                <div class="input-row {% if block.settings.display_first_name and block.settings.display_last_name %}newsletter-both-names--true {% else %}newsletter-both-names--false {% endif %}">
+                                                    {% if block.settings.display_first_name %}
+                                                    <input type="text" class="firstName" name="contact[first_name]" placeholder="{{ block.settings.first_name_label }}" />
+                                                    {% endif %}
+                                                    {% if block.settings.display_last_name %}
+                                                    <input type="text" name="contact[last_name]" placeholder="{{ block.settings.last_name_label }}" />
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="input-row">
+                                                    <input type="hidden" name="challenge" value="false" />
+                                                    <input type="email" class="contact_email" name="contact[email]" required placeholder="{{ block.settings.email_label }}" />
+                                                    <input type='submit' class="button button--primary" value="{{ block.settings.submit_button }}" />
+                                                </div>
+                                                {% endform %}
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                            {% endcase %}
+                        {% endfor %}
+                    </aside>
+                </div>
+            {%- endif -%}
+
+            {% comment %}
+                get all content
+            {% endcomment %}
+            {%- liquid
+            assign all_content = article.content
+            for block in section.blocks
+                case block.type
+                    when 'banner'
+                        assign all_content = all_content | append: block.settings.text
+                    when 'html'
+                        assign all_content = all_content | append: block.settings.html_code
+                    when 'liquid'
+                        assign all_content = all_content | append: block.settings.liquid_code
+                endcase
+            endfor
+            -%}
+
+            <div class="article-template__side-content">
+                <div class="article-template__side-content-inner page-width page-width--narrow rte">
+                    {%- for block in section.blocks -%}
+                        {%- case block.type -%}
+                            {%- when 'author' -%}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__author block-{{ block.id }}-padding">
+                                    {%- if block.settings.show_author -%}
+                                    <span class="article-template__author-avatar">
+                                        <img src="{{ article.user.image | img_url: 'master' }}" alt="{{ article.author }}" width="80" height="80" loading="lazy">
+                                    </span>
+                                    {%- endif -%}
+                                    <span class="article-template__author-text">
+                                        {%- if block.settings.show_author -%}
+                                        <span class="article-template__author-name">
+                                            {{ article.author }}
+                                        </span>
+                                        {%- endif -%}
+                                        {%- if block.settings.show_date -%}
+                                        <span class="article-template__date">
+                                            {{ article.published_at | date: '%d. %B %Y' }}
+                                        </span>
+                                        {%- endif -%}
+                                    </span>
+                                </div>
+
+                            {%- when 'published_date' -%}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__published-date block-{{ block.id }}-padding">
+                                    {%- if block.settings.published_label != blank -%}
+                                    <span class="article-template__published-label">
+                                        {{ block.settings.published_label | append: " " }}
+                                    </span>
+                                    {%- endif -%}
+                                    <span class="article-template__date">
+                                        {{ article.published_at | date: '%d. %B %Y' }}
+                                    </span>
+                                    {%- if block.settings.show_reading_time -%}
+                                    <span class="article-template__reading-time">
+                                        {% assign reading_time = all_content | strip_html | split: ' ' | size | times: 1.0 | divided_by: 50 | ceil %}
+                                        {{ reading_time | prepend: " • " | append: " min read" }}
+                                    </span>
+                                    {%- endif -%}
+                                </div>
+
+                            {%- when 'breadcrumb' -%}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__breadcrumb block-{{ block.id }}-padding">
+
+                                    {% if block.settings.blog_breadcrumb %}
+                                        <script type="application/ld+json">
+                                        {
+                                            "@context": "https://schema.org",
+                                            "@type": "BreadcrumbList",
+                                            "itemListElement": [
+                                            {
+                                                "@type": "ListItem",
+                                                "position": 1,
+                                                "item": {
+                                                "@id": "{{ shop.url }}",
+                                                "name": "{{ block.settings.breadcrumbs_home }}"
+                                                }
+                                            },
+                                            {
+                                                "@type": "ListItem",
+                                                "position": 2,
+                                                "item": {
+                                                "@id": "{{ blog.url }}",
+                                                "name": "{{ blog.title }}"
+                                                }
+                                            }
+                                            ]
+                                        }
+                                        </script>
+                                        <div class="breadcrumb_text">
+                                            <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}">
+                                            <span>{{ block.settings.breadcrumbs_home }}</span>
+                                            </a>&nbsp;<span class="icon-slash">/</span>
+                                            <a href="{{ blog.url }}" title="{{ blog.title | escape }}">
+                                            <span>{{ blog.title }}</span>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if block.settings.blog_pagination %}
+                                        <div class="article-pagination">
+                                        {% if blog.next_article %}
+                                            {{ block.settings.previous_label | prepend: '<span class="icon-left-arrow"></span> ' | link_to: blog.next_article }}
+                                        {% endif %}
+
+                                        {% if blog.previous_article and blog.next_article %}
+                                            &nbsp;<span class="icon-slash">/</span>
+                                        {% endif %}
+
+                                        {% if blog.previous_article %}
+                                            {{ block.settings.next_label | append: ' <span class="icon-right-arrow"></span>' | link_to: blog.previous_article }}
+                                        {% endif %}
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+
+                            {%- when 'content' -%}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div
+                                class="article-template__content block-{{ block.id }}-padding"
+                                itemprop="articleBody"
+                                {{ block.shopify_attributes }}
+                                >
+                                {{ article.content }}
+                                </div>
+
+                            {% when 'image' %}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__widget-image block-{{ block.id }}-padding">
+                                    <img
+                                        srcset="
+                                        {% if block.settings.image.width >= 350 %}{{ block.settings.image | image_url: width: 350 }} 350w,{% endif %}
+                                        {% if block.settings.image.width >= 750 %}{{ block.settings.image | image_url: width: 750 }} 750w,{% endif %}
+                                        {% if block.settings.image.width >= 1100 %}{{ block.settings.image | image_url: width: 1100 }} 1100w,{% endif %}
+                                        {% if block.settings.image.width >= 1500 %}{{ block.settings.image | image_url: width: 1500 }} 1500w,{% endif %}
+                                        {% if block.settings.image.width >= 2200 %}{{ block.settings.image | image_url: width: 2200 }} 2200w,{% endif %}
+                                        {% if block.settings.image.width >= 3000 %}{{ block.settings.image | image_url: width: 3000 }} 3000w,{% endif %}
+                                        {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                                        "
+                                        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                                        src="{{ block.settings.image | image_url: width: 1100 }}"
+                                        loading="lazy"
+                                        width="{{ block.settings.image.width }}"
+                                        height="{{ block.settings.image.height }}"
+                                        alt="{{ block.settings.image.alt | escape }}"
+                                    >
+                                </div>
+
+                            {% when 'banner' %}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__widget-banner block-{{ block.id }}-padding">
+                                    <div class="row" style="background-color: {{ block.settings.background }};">
+                                        <div class="col col-content">
+                                            <div class="content">
+
+                                                <{{ block.settings.headline_type }} class="{{ block.settings.headline_style }} headline">
+                                                    {{ block.settings.headline }}
+                                                </{{ block.settings.headline_type }}>
+
+                                                <div class="text">
+                                                    {{ block.settings.text }}
+                                                </div>
+
+                                                {% if block.settings.button_text != blank %}
+                                                    <a href="{{ block.settings.button_link }}" class="btn" title="{{ block.settings.button_text }}">{{ block.settings.button_text }}</a>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                        <div class="col col-img {{ block.settings.image_position }}">
+                                            <img
+                                                srcset="
+                                                {% if block.settings.image.width >= 350 %}{{ block.settings.image | image_url: width: 350 }} 350w,{% endif %}
+                                                {% if block.settings.image.width >= 750 %}{{ block.settings.image | image_url: width: 750 }} 750w,{% endif %}
+                                                {% if block.settings.image.width >= 1100 %}{{ block.settings.image | image_url: width: 1100 }} 1100w,{% endif %}
+                                                {% if block.settings.image.width >= 1500 %}{{ block.settings.image | image_url: width: 1500 }} 1500w,{% endif %}
+                                                {% if block.settings.image.width >= 2200 %}{{ block.settings.image | image_url: width: 2200 }} 2200w,{% endif %}
+                                                {% if block.settings.image.width >= 3000 %}{{ block.settings.image | image_url: width: 3000 }} 3000w,{% endif %}
+                                                {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                                                "
+                                                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                                                src="{{ block.settings.image | image_url: width: 250 }}"
+                                                loading="lazy"
+                                                width="{{ block.settings.image.width }}"
+                                                height="{{ block.settings.image.height }}"
+                                                alt="{{ block.settings.image.alt | escape }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% when 'html' %}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__widget-html block-{{ block.id }}-padding">
+                                    {{ block.settings.html_code }}
+                                </div>
+
+                            {% when 'liquid' %}
+
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__widget-liquid block-{{ block.id }}-padding">
+                                    {{ block.settings.liquid_code }}
+                                </div>
+
+                            {% when 'social-sharing' %}
+                                {%- style -%}
+                                .block-{{ block.id }}-padding {
+                                    margin-top: {{ block.settings.padding_top | times: 0.75 | round: 0 }}px;
+                                    margin-bottom: {{ block.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                                }
+
+                                @media screen and (min-width: 750px) {
+                                    .block-{{ block.id }}-padding {
+                                        margin-top: {{ block.settings.padding_top }}px;
+                                        margin-bottom: {{ block.settings.padding_bottom }}px;
+                                    }
+                                }
+                                {%- endstyle -%}
+
+                                <div class="article-template__widget-social-sharing block-{{ block.id }}-padding">
+                                    <div class="text">{{ block.settings.social_share_text }}</div>
+                                    <ul class="social-list">
+                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.origin | append: article.url }}" target="_blank" class="facebook" title="Facebook"><svg viewBox="0 0 512 512"><path d="M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19.5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 211.9 197.4 211.9 197.4z"/></svg><!--[if lt IE 9]><em>Facebook</em><![endif]--></a></li>
+                                        <li><a href="https://twitter.com/share?url={{ request.origin | append: article.url }}" class="twitter" target="_blank" title="Twitter"><svg viewBox="0 0 512 512"><path d="M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.8 28.6-36 -12.6 7.5-26.5 12.9-41.3 15.8 -11.9-12.6-28.8-20.6-47.5-20.6 -42 0-72.9 39.2-63.4 79.9 -54.1-2.7-102.1-28.6-134.2-68 -17 29.2-8.8 67.5 20.1 86.9 -10.7-0.3-20.7-3.3-29.5-8.1 -0.7 30.2 20.9 58.4 52.2 64.6 -9.2 2.5-19.2 3.1-29.4 1.1 8.3 25.9 32.3 44.7 60.8 45.2 -27.4 21.4-61.8 31-96.4 27 28.8 18.5 63 29.2 99.8 29.2 120.8 0 189.1-102.1 185-193.6C399.9 193.1 410.9 181.7 419.6 168.6z"/></svg><!--[if lt IE 9]><em>Twitter</em><![endif]--></a></li>
+                                        <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{ request.origin | append: article.url }}" class="linkedin" target="_blank" title="LinkedIn"><svg viewBox="0 0 512 512"><path d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"/></svg><!--[if lt IE 9]><em>LinkedIn</em><![endif]--></a></li>
+                                        <li><a href="mailto:?subject=Share {{ article.title }}&body={{ article.title }} {{ request.origin | append: article.url }}" class="email" target="_blank" title="Email"><svg viewBox="0 0 512 512"><path d="M101.3 141.6v228.9h0.3 308.4 0.8V141.6H101.3zM375.7 167.8l-119.7 91.5 -119.6-91.5H375.7zM127.6 194.1l64.1 49.1 -64.1 64.1V194.1zM127.8 344.2l84.9-84.9 43.2 33.1 43-32.9 84.7 84.7L127.8 344.2 127.8 344.2zM384.4 307.8l-64.4-64.4 64.4-49.3V307.8z"/></svg><!--[if lt IE 9]><em>Email</em><![endif]--></a></li>
+                                    </ul>
+                                </div>
+
+                        {%- endcase -%}
+                    {%- endfor -%}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ request.origin | append: page.url | json }}
+    },
+    "headline": {{ article.title | json }},
+    {% if article.excerpt != blank %}
+      "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+      "image": [
+        {{ article | image_url: width: article.image.width | prepend: "https:" | json }}
+      ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      {% if settings.share_image %}
+        "logo": {
+          "@type": "ImageObject",
+          "height": {{ settings.share_image.height | json }},
+          "url": {{ settings.share_image | image_url: width: settings.share_image.width | prepend: "https:" | json }},
+          "width": {{ settings.share_image.width | json }}
+        },
+      {% endif %}
+      "name": {{ shop.name | json }}
+    }
+  }
+</script>
+
+{% schema %}
+{
+    "name": "Buzzwoo blog post",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "show_sidebar",
+            "label": "Show side bar",
+            "default": false
+        }
+    ],
+    "blocks": [
+        {
+            "type": "@app"
+        },
+        {
+            "type": "featured_image",
+            "name": "Featured Image",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "show_title",
+                    "label": "Show title on featured image",
+                    "default": true
+                },
+                {
+                  "type": "text",
+                  "id": "title_size",
+                  "label": "Title Size",
+                  "info": "If left empty, the theme's heading size will be used. example: 36px"
+                }
+            ]
+        },
+        {
+            "type": "author",
+            "name": "Author",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "show_author",
+                    "label": "Show author",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_date",
+                    "label": "Show date",
+                    "default": true
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default":0
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 70
+                }
+            ]
+        },
+        {
+            "type": "published_date",
+            "name": "Published date",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "published_label",
+                    "label": "Published label",
+                    "default": "Published date:"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_reading_time",
+                    "label": "Show reading time",
+                    "default": true
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default":0
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 0
+                }
+            ]
+        },
+        {
+            "type": "breadcrumb",
+            "name": "Breadcrumb and Pagination",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "blog_breadcrumb",
+                    "label": "Show breadcrumb links",
+                    "default": true
+                },
+                {
+                    "type": "text",
+                    "id": "breadcrumbs_home",
+                    "label": "Home label",
+                    "default": "Home"
+                },
+                {
+                  "type": "checkbox",
+                  "id": "blog_pagination",
+                  "label": "Show next blog post link",
+                  "default": true
+                },
+                {
+                    "type": "text",
+                    "id": "previous_label",
+                    "label": "Previous label",
+                    "default": "Previous"
+                },
+                {
+                    "type": "text",
+                    "id": "next_label",
+                    "label": "Next label",
+                    "default": "Next"
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default":0
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "social-sharing",
+            "name": "Social Sharing",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "social_share_text",
+                    "label": "Share label",
+                    "default": "Share this:"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "facebook",
+                    "label": "Facebook",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "twitter",
+                    "label": "Twitter",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "linkedin",
+                    "label": "Linkedin",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "email",
+                    "label": "Email",
+                    "default": true
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 50
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "content",
+            "name": "Content",
+            "limit": 1,
+            "settings": [
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 0
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "image",
+            "name": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 50
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "banner",
+            "name": "Banner",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "headline",
+                    "label": "Heading",
+                    "default": "Heading"
+                },
+                {
+                    "type": "select",
+                    "id": "headline_type",
+                    "label": "Headline Type",
+                    "options": [
+                        {
+                            "value": "h1",
+                            "label": "H1"
+                        },
+                        {
+                            "value": "h2",
+                            "label": "H2"
+                        },
+                        {
+                            "value": "h3",
+                            "label": "H3"
+                        },
+                        {
+                            "value": "h4",
+                            "label": "H4"
+                        },
+                        {
+                            "value": "h5",
+                            "label": "H5"
+                        },
+                        {
+                            "value": "h6",
+                            "label": "H6"
+                        }
+                    ],
+                    "default": "h2"
+                },
+                {
+                    "type": "select",
+                    "id": "headline_style",
+                    "label": "Headline Style",
+                    "options": [
+                        {
+                            "value": "h1",
+                            "label": "H1"
+                        },
+                        {
+                            "value": "h2",
+                            "label": "H2"
+                        },
+                        {
+                            "value": "h3",
+                            "label": "H3"
+                        },
+                        {
+                            "value": "h4",
+                            "label": "H4"
+                        },
+                        {
+                            "value": "h5",
+                            "label": "H5"
+                        },
+                        {
+                            "value": "h6",
+                            "label": "H6"
+                        }
+                    ],
+                    "default": "h2"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button Text"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link",
+                    "label": "Button link"
+                },
+                {
+                    "type": "color",
+                    "id": "background",
+                    "label": "Background",
+                    "default": "#A6CEDB"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "select",
+                    "id": "image_position",
+                    "label": "Image position",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Right"
+                        }
+                    ],
+                    "default": "right"
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 50
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "html",
+            "name": "HTML embed",
+            "settings": [
+                {
+                    "type": "html",
+                    "id": "html_code",
+                    "label": "HTML code"
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 50
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "liquid",
+            "name": "Liquid embed",
+            "settings": [
+                {
+                    "type": "liquid",
+                    "id": "liquid_code",
+                    "label": "Liquid code"
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 50
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+            "type": "teaser-with-link",
+            "name": "Teaser (Sidebar)",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image",
+                    "info": "600 x 600px jpg recommended"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Heading",
+                    "default": "Your title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "Text",
+                    "default": "<p>Add your own custom content to give more information about your store, availability details...</p>"
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button text"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link",
+                    "label": "Button link"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_endline",
+                    "label": "Show end line",
+                    "default": true
+                },
+                {
+                  "type": "header",
+                  "content": "SECTION PADDING"
+                },
+                {
+                    "type": "range",
+                    "id": "padding_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Top padding",
+                    "default": 50
+                },
+                {
+                    "type": "range",
+                    "id": "padding_bottom",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "px",
+                    "label": "Bottom padding",
+                    "default": 50
+                }
+            ]
+        },
+        {
+          "type": "menu",
+          "name": "Menu (Sidebar)",
+          "settings": [
+                {
+                    "type": "link_list",
+                    "id": "custom_menu_linklist",
+                    "label": "Menu"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_endline",
+                    "label": "Show end line",
+                    "default": true
+                }
+            ]
+        },
+        {
+          "type": "search",
+          "name": "Search form (Sidebar)",
+          "limit": 1,
+          "settings": [
+                {
+                    "type": "text",
+                    "id": "search_label",
+                    "label": "Search label",
+                    "default": "Search..."
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_endline",
+                    "label": "Show end line",
+                    "default": true
+                }
+            ]
+        },
+        {
+          "type": "newsletter",
+          "name": "Newsletter (Sidebar)",
+          "limit": 1,
+          "settings": [
+                {
+                    "type": "text",
+                    "id": "newsletter_title",
+                    "label": "Heading",
+                    "default": "Subscribe"
+                },
+                {
+                    "type": "richtext",
+                    "id": "newsletter_text",
+                    "label": "Subheading",
+                    "default": "<p>Sign up to get the latest on sales, new releases and more …</p>"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "display_first_name",
+                    "label": "Show first name"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "display_last_name",
+                    "label": "Show last name"
+                },
+                {
+                    "type": "text",
+                    "id": "mailchimp_link",
+                    "label": "Mailchimp action URL",
+                    "info": "[Find your form action URL](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/115006912487-Setting-Up-MailChimp-Turbo-)"
+                },
+                {
+                    "type": "header",
+                    "content": "FORM LABEL"
+                },
+                {
+                    "type": "text",
+                    "id": "first_name_label",
+                    "label": "First name label",
+                    "default": "First name"
+                },
+                {
+                    "type": "text",
+                    "id": "last_name_label",
+                    "label": "Last name label",
+                    "default": "Last name"
+                },
+                {
+                    "type": "text",
+                    "id": "email_label",
+                    "label": "Email name label",
+                    "default": "Enter your email address..."
+                },
+                {
+                    "type": "text",
+                    "id": "submit_button",
+                    "label": "Submit Button",
+                    "default": "Sign Up"
+                },
+                {
+                    "type": "text",
+                    "id": "posted_successfully",
+                    "label": "Successfully Message",
+                    "default": "Thank you for joining our mailing list!"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_endline",
+                    "label": "Show end line",
+                    "default": true
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

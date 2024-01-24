@@ -1,0 +1,151 @@
+<section class="section blog blog-overview" id="section-{{ section.id }}" data-section-type="article-list" data-section-id="{{ section.id }}">
+  <div class="{{ section.settings.container_class }}">
+
+    {%- if section.settings.subheading != blank or section.settings.title != blank or section.blocks.first.settings.blog.title != blank-%}
+      <header class="page-header">
+        <div class="section-header">
+          {%- if section.settings.subheading != blank -%}
+            <h2 class="title--primary">{{ section.settings.subheading | escape }}</h2>
+          {%- endif -%}
+
+          {% unless template contains 'index' %}
+            {%- if section.settings.title != blank -%}
+              <h2 class="title--primary">{{ section.settings.title | escape }}</h2>
+            {% elsif section.blocks.first.settings.blog.title != blank %}
+              <h2 class="title--primary">{{ section.blocks.first.settings.blog.title | escape }}</h2>
+            {%- endif -%}
+          {% endunless %}
+        </div>
+      </header>
+    {%- endif -%}
+
+    <div class="article-list__wrapper">
+      <div class="article-list__row row">
+        {%- assign block = section.blocks.first -%}
+
+        {%- case block.type -%}
+          {%- when 'article' -%}
+            {%- for i in (1..3) -%}
+              {%- assign article_option = 'article_' | append: i -%}
+              {%- assign article = articles[block.settings[article_option]] -%}
+
+              {%- unless article == empty -%}
+                <div class="col-12 col-sm-6 col-md-4 {% if forloop.index == 3 %}hidden-tablet{% endif %}">
+                  {%- render 'article-item', block: block, article: article -%}
+                </div>
+              {%- endunless -%}
+            {%- endfor -%}
+
+          {%- when 'blog' -%}
+            {%- assign blog = blogs[block.settings.blog] -%}
+            {% assign sort_blog_articles = blog.articles | sort: 'published_at' | reverse %}
+            {%- for article in sort_blog_articles limit: 3 -%}
+              <div class="col-12 col-sm-6 col-md-4 {% if forloop.index == 3 %}hidden-tablet{% endif %}">
+                {%- render 'article-item', block: block, article: article -%}
+              </div>
+            {%- endfor -%}
+        {%- endcase -%}
+
+      </div>
+    </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="section-footer">
+        <a href="{{ section.settings.button_link }}" class="button">{{ section.settings.button_text | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "section",
+  "max_blocks": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "label": "Show article category",
+      "info": "The first article's tag is used as the main category.",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View all articles"
+    },
+    {
+      "type": "text",
+      "id": "container_class",
+      "label": "Container Class",
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article_1",
+          "label": "Article 1"
+        },
+        {
+          "type": "article",
+          "id": "article_2",
+          "label": "Article 2"
+        },
+        {
+          "type": "article",
+          "id": "article_3",
+          "label": "Article 3"
+        }
+      ]
+    },
+    {
+      "type": "blog",
+      "name": "Blog",
+      "settings": [
+        {
+          "type": "blog",
+          "id": "blog",
+          "label": "Blog"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Blog posts",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "blog",
+          "settings": {
+            "blog": "news"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

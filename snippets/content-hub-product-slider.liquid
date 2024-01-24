@@ -1,0 +1,66 @@
+<style>
+  .content-hub-item.article-slider .article-title {
+      color: {{ block.settings.product_text_color }};
+  }
+</style>
+
+<div class="content-hub-item article-slider block-{{ index }}" {% if block.settings.anchor != blank %} id="{{ block.settings.anchor }}" {% endif %}>
+  
+{% if block.settings.heading %}
+  <{{block.settings.heading_tag}} class="{{ block.settings.headline_style }} heading">
+    {{ block.settings.heading }}
+  </{{block.settings.heading_tag}}>
+{% endif %}
+
+<div class="article-items">
+  {% if block.settings.product_1 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_1 %}
+  {% endif %}
+  {% if block.settings.product_2 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_2 %}
+  {% endif %}
+  {% if block.settings.product_3 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_3 %}
+  {% endif %}
+  {% if block.settings.product_4 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_4 %}
+  {% endif %}
+  {% if block.settings.product_5 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_5 %}
+  {% endif %}
+  {% if block.settings.product_6 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_6 %}
+  {% endif %}
+  {% if block.settings.product_7 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_7 %}
+  {% endif %}
+  {% if block.settings.product_8 != blank %}
+    {% render 'content-hub-product-slider-item', product: block.settings.product_8 %}
+  {% endif %}
+
+  {% if block.settings.product_1 == blank 
+          and block.settings.product_2 == blank 
+          and block.settings.product_3 == blank 
+          and block.settings.product_4 == blank 
+          and block.settings.product_5 == blank 
+          and block.settings.product_6 == blank 
+          and block.settings.product_7 == blank 
+          and block.settings.product_8 == blank 
+          %}
+
+    {% for num in (1..5) %}
+      <div class="article-item">
+        <a class="article-link" href="#">
+          <div class="article-img">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+          </div>
+          <div class="article-title">
+            Product
+            {{ num }}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+</div>

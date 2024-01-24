@@ -1,0 +1,43 @@
+<style>
+  .content-hub-item.is-quote.block-{{ index }} {
+    border-left: 5px solid {{ block.settings.quote_color }};
+  }
+
+  .content-hub-item.is-quote.is-quote-2.block-{{ index }} {
+    border: none;
+  }
+
+  {% if block.settings.heading_color.alpha != 0.0 %}
+    .content-hub-item.block-{{ index }} .heading {
+      color: {{ block.settings.heading_color }};
+    }
+  {% endif %}
+
+  {% if block.settings.sub_heading_color.alpha != 0.0 %}
+    .content-hub-item.block-{{ index }} .sub-heading {
+      color: {{ block.settings.sub_heading_color }};
+    }
+  {% endif %}
+
+  {% if block.settings.text_color.alpha != 0.0 %}
+    .content-hub-item.block-{{ index }} .text {
+      color: {{ block.settings.text_color }};
+    }
+  {% endif %}
+</style>
+
+<div class="content-hub-item {% if block.settings.is_border %}border-item{% endif %} content block-{{ index }} {% if block.settings.is_quote %}is-quote {% endif %}{% if block.settings.quote_style == "2" %}is-quote-2{% endif %}" style="background-color: {{ block.settings.background }};" {% if block.settings.anchor != blank %} id="{{ block.settings.anchor }}" {% endif %}>
+  {% if block.settings.show_heading %}
+    <{{block.settings.heading_tag}} class="{{ block.settings.headline_style }} heading">
+      {{ block.settings.headline }}
+    </{{block.settings.heading_tag}}>
+  {% endif %}
+  {% if block.settings.sub_headline != blank %}
+    <div class="sub-heading">
+      {{ block.settings.sub_headline }}
+    </div>
+  {% endif %}
+  <div class="text">
+    {{ block.settings.text }}
+  </div>
+</div>

@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "main": {
+      "type": "blog-overview-template",
+      "settings": {
+        "blog_overview_page_title": "Blog overview",
+        "heading_tag": "h1",
+        "blog_overview_title": "All"
+      }
+    },
+    "1661233326917aa71a": {
+      "type": "blog-posts",
+      "blocks": {
+        "16612333260e24e58a-0": {
+          "type": "blog",
+          "settings": {
+            "blog": "news"
+          }
+        }
+      },
+      "block_order": [
+        "16612333260e24e58a-0"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "show_category": false,
+        "button_link": "shopify:\/\/blogs\/news",
+        "button_text": "All Article"
+      }
+    },
+    "166126779420874a63": {
+      "type": "blog-posts",
+      "blocks": {
+        "166126779420bb4f3c-0": {
+          "type": "blog",
+          "settings": {
+            "blog": "magazin"
+          }
+        }
+      },
+      "block_order": [
+        "166126779420bb4f3c-0"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "show_category": false,
+        "button_link": "shopify:\/\/blogs\/magazin",
+        "button_text": "Alle Article"
+      }
+    },
+    "1660886971fab8cc6a": {
+      "type": "blog-posts",
+      "blocks": {
+        "16608869718fe76665-0": {
+          "type": "blog",
+          "settings": {
+            "blog": "blog"
+          }
+        }
+      },
+      "block_order": [
+        "16608869718fe76665-0"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "show_category": false,
+        "button_link": "shopify:\/\/blogs\/blog",
+        "button_text": "Alle Article"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1661233326917aa71a",
+    "166126779420874a63",
+    "1660886971fab8cc6a"
+  ]
+}

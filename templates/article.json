@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article-template",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "show_title": false
+          }
+        },
+        "44306f6f-0084-457d-9ab2-e9d80f6f65c9": {
+          "type": "breadcrumb",
+          "settings": {
+            "blog_breadcrumb": true,
+            "breadcrumbs_home": "Home",
+            "blog_pagination": true,
+            "previous_label": "Previous",
+            "next_label": "Next",
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        },
+        "author": {
+          "type": "author",
+          "settings": {
+            "show_author": true,
+            "show_date": true,
+            "padding_top": 0,
+            "padding_bottom": 15
+          }
+        },
+        "fb4975d6-9ceb-494e-b505-280f50da547c": {
+          "type": "social-sharing",
+          "settings": {
+            "social_share_text": "Share this:",
+            "facebook": true,
+            "twitter": true,
+            "linkedin": true,
+            "email": true,
+            "padding_top": 0,
+            "padding_bottom": 15
+          }
+        },
+        "63709f7a-d924-40dc-ba83-83acd5877419": {
+          "type": "published_date",
+          "settings": {
+            "published_label": "Published date:",
+            "show_reading_time": true,
+            "padding_top": 0,
+            "padding_bottom": 50
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "padding_top": 0,
+            "padding_bottom": 50
+          }
+        },
+        "856fd01e-9b68-4869-b2a2-69b17572bf8f": {
+          "type": "html",
+          "settings": {
+            "html_code": "<iframe width=\"560\" height=\"315\" src=\"https:\/\/www.youtube.com\/embed\/B9VRvOKKwfs?controls=0\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen=\"\"><\/iframe>",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "5343fe5a-265b-48bb-9afc-2647fb05f19d": {
+          "type": "liquid",
+          "settings": {
+            "liquid_code": "<h2>{{ blog.title }}<\/h2>",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "04d543f1-af63-4db1-8a1f-b8c045c85c53": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/coffee-mug-in-means-top.jpg",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "d2d23d17-ba5b-41e4-ac58-a0ee377f7c28": {
+          "type": "banner",
+          "settings": {
+            "headline": "Heading",
+            "headline_type": "h2",
+            "headline_style": "h2",
+            "text": "<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. <\/p>",
+            "button_text": "Button Text",
+            "button_link": "",
+            "background": "#f3f3f3",
+            "image": "shopify:\/\/shop_images\/overhead-coffee-brown.jpg",
+            "image_position": "right",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "84e0be00-bdf7-41e8-9c3f-4ad47290c2d0": {
+          "type": "banner",
+          "settings": {
+            "headline": "Heading",
+            "headline_type": "h2",
+            "headline_style": "h2",
+            "text": "<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. <\/p>",
+            "button_text": "Button Text",
+            "button_link": "",
+            "background": "#f1fbff",
+            "image": "shopify:\/\/shop_images\/giorgio-trovato-p0OlRAAYXLY-unsplash.jpg",
+            "image_position": "left",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "e68a2cb1-f8f4-46d6-8ec9-2b2c5c6e1162": {
+          "type": "menu",
+          "settings": {
+            "custom_menu_linklist": "sidebar-blog",
+            "show_endline": true
+          }
+        },
+        "e7077ecb-9cb4-4d34-b641-e180b33e57a7": {
+          "type": "search",
+          "settings": {
+            "search_label": "Search...",
+            "show_endline": true
+          }
+        },
+        "b9c9fdf5-d087-40a9-a780-a5ae756ce46a": {
+          "type": "newsletter",
+          "settings": {
+            "newsletter_title": "Subscribe",
+            "newsletter_text": "<p>Sign up to get the latest on sales, new releases and more …<\/p>",
+            "display_first_name": true,
+            "display_last_name": true,
+            "mailchimp_link": "",
+            "first_name_label": "First name",
+            "last_name_label": "Last name",
+            "email_label": "Enter your email address...",
+            "submit_button": "Sign Up",
+            "posted_successfully": "Thank you for joining our mailing list!",
+            "show_endline": true
+          }
+        },
+        "9feeae14-072f-4726-b635-b2255825c939": {
+          "type": "teaser-with-link",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/overhead-coffee-brown.jpg",
+            "title": "Your title",
+            "content": "<p>Add your own custom content to give more information about your store, availability details...<\/p>",
+            "button_text": "Button text",
+            "button_link": "",
+            "show_endline": true,
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "f63b0723-6589-4593-a168-26d1a5b1f896": {
+          "type": "teaser-with-link",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/sreekumar-p-L2p3pK7p5BY-unsplash.jpg",
+            "title": "Your title",
+            "content": "<p>Add your own custom content to give more information about your store, availability details...<\/p>",
+            "button_text": "Button text",
+            "button_link": "",
+            "show_endline": true,
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "44306f6f-0084-457d-9ab2-e9d80f6f65c9",
+        "author",
+        "fb4975d6-9ceb-494e-b505-280f50da547c",
+        "63709f7a-d924-40dc-ba83-83acd5877419",
+        "content",
+        "856fd01e-9b68-4869-b2a2-69b17572bf8f",
+        "5343fe5a-265b-48bb-9afc-2647fb05f19d",
+        "04d543f1-af63-4db1-8a1f-b8c045c85c53",
+        "d2d23d17-ba5b-41e4-ac58-a0ee377f7c28",
+        "84e0be00-bdf7-41e8-9c3f-4ad47290c2d0",
+        "e68a2cb1-f8f4-46d6-8ec9-2b2c5c6e1162",
+        "e7077ecb-9cb4-4d34-b641-e180b33e57a7",
+        "b9c9fdf5-d087-40a9-a780-a5ae756ce46a",
+        "9feeae14-072f-4726-b635-b2255825c939",
+        "f63b0723-6589-4593-a168-26d1a5b1f896"
+      ],
+      "settings": {
+        "show_sidebar": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

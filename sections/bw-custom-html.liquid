@@ -1,0 +1,209 @@
+<style>
+  {%- if section.settings.background == 'rgba(0,0,0,0)' -%}
+    {%- assign section_background = 'transparent' -%}
+  {%- else -%}
+    {%- assign section_background = section.settings.background -%}
+  {%- endif -%}
+
+  {%- if section.settings.text_color == 'rgba(0,0,0,0)' -%}
+    {%- assign heading_color = settings.color_header_text -%}
+    {%- assign text_color = settings.color_body_text -%}
+  {%- else -%}
+    {%- assign heading_color = section.settings.text_color -%}
+    {%- assign text_color = section.settings.text_color -%}
+  {%- endif -%}
+
+  #shopify-section-{{ section.id }}{
+    background-color: {{ section_background }};
+    color: {{ text_color }};
+    padding-top: {{ section.settings.padding_top | append: 'px' }};
+    padding-bottom: {{ section.settings.padding_bottom | append: 'px' }};
+  }
+
+  #shopify-section-{{ section.id }} h1,
+  #shopify-section-{{ section.id }} h2,
+  #shopify-section-{{ section.id }} h3,
+  #shopify-section-{{ section.id }} h4,
+  #shopify-section-{{ section.id }} h5,
+  #shopify-section-{{ section.id }} h6 {
+    color: {{ heading_color }};
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} p {
+     color: {{ text_color }};
+  }
+</style>
+
+<div
+  class="page-width {% if section.settings.narrow_column %} page-width--narrow{% endif %}"
+  id="shopify-section-{{ section.id }}"
+>
+  <div class="section__custom-html">
+    <div class="section__custom-html-inner">
+      {%- if section.settings.subheading != blank or section.settings.title != blank -%}
+        <header class="section__header text-container">
+          {%- if section.settings.subheading != blank -%}
+            <{{ section.settings.subheading_type }} class="heading heading--small">
+              {{- section.settings.subheading | escape -}}
+            </{{ section.settings.subheading_type }}>
+          {%- endif -%}
+
+          {%- if section.settings.title != blank -%}
+            <{{ section.settings.title_type }} class="heading h2">
+              {{- section.settings.title | escape -}}
+            </{{ section.settings.title_type }}>
+          {%- endif -%}
+        </header>
+      {%- endif -%}
+
+      {%- if section.settings.html != blank -%}
+        <div class="html">
+          {{- section.settings.html -}}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom HTML",
+  "class": "shopify-section--custom-html",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Your subheading"
+    },
+    {
+      "type": "select",
+      "id": "subheading_type",
+      "label": "Subheadline Type",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Your title"
+    },
+    {
+      "type": "select",
+      "id": "title_type",
+      "label": "Heading Type",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "html",
+      "id": "html",
+      "label": "HTML",
+      "default": "<p style=\"text-align: center\">Write or copy/paste HTML code</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "container",
+      "label": "Has Container",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom HTML"
+    }
+  ]
+}
+{% endschema %}

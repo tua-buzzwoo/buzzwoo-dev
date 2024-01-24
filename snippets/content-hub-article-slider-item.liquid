@@ -1,0 +1,10 @@
+<div class="article-item">
+  <a href="{{ article.url }}" class="article-link">
+    <div class="article-img">
+    {{ article.image.src | image_url: width: 300 | image_tag: height: 300 }}
+    </div>
+    <div class="article-title">
+      {{ article.title }}
+    </div>
+  </a>
+</div>

@@ -1,0 +1,275 @@
+{% if section.blocks.size > 0 %}
+  <section
+    id="faqs-section-{{ section.id }}"
+    class="shopify-section section-faqs index-section section-{{ section.id }}-padding {% if section.settings.theme_width_class %}{{section.settings.theme_width_class}}{% endif %}"
+    data-section-id="{{ section.id }}"
+    itemscope
+    itemtype="https://schema.org/FAQPage"
+  >
+    <div class="content-area clearfix page-width relative">
+      {% if section.settings.title != blank %}
+        <div class="section-header">
+          <{{ section.settings.headline_type }} itemprop="name">
+            {{- section.settings.title | escape -}}
+          </{{ section.settings.headline_type }}>
+        </div>
+      {% endif %}
+
+      <div class="faqs-wrapper">
+        {% for block in section.blocks %}
+          {% if block.settings.question != blank %}
+            <div class="faq-item close" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <{{ block.settings.headline_type }} class="faq-accordion" itemprop="name">
+                {{- block.settings.question | escape -}}
+              </{{ block.settings.headline_type }}>
+              <div class="faq-panel" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-faqs .section-header {
+      text-align: center;
+  }
+
+  .section-faqs .faq-item {
+    text-align: left;
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    border-bottom: 1px solid #000;
+  }
+
+  .section-faqs .faq-accordion {
+    padding: 0 20px;
+    cursor: pointer;
+    margin: 2.5rem 0 1.125rem;
+    line-height: 1.2;
+    position: relative;
+  }
+
+  .section-faqs .faq-accordion::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 0;
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  .section-faqs .open .faq-panel {
+    padding: 20px;
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+    display:block;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+    box-sizing: border-box;
+  }
+
+  .section-faqs .open .faq-accordion::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='121.805' height='121.804' xmlns:v='https://vecta.io/nano'%3E%3Cpath d='M7.308 68.211h107.188a7.31 7.31 0 0 0 7.309-7.31 7.31 7.31 0 0 0-7.309-7.309H7.308A7.31 7.31 0 0 0 0 60.902a7.31 7.31 0 0 0 7.308 7.309z'/%3E%3C/svg%3E");
+  }
+
+  .section-faqs .close .faq-panel {
+    height:0px;
+    transition:height 1s ease-out;
+    transform: scaleY(0);
+    float:left;
+    display:block;
+  }
+
+  .section-faqs .close .faq-accordion::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 341.4 341.4' xmlns:v='https://vecta.io/nano'%3E%3Cpath d='M192 149.4V0h-42.6v149.4H0V192h149.4v149.4H192V192h149.4v-42.6z'/%3E%3C/svg%3E");
+  }
+
+  {% if section.settings.custom_css %}
+    {{ section.settings.custom_css }}
+  {% endif %}
+{%- endstyle -%}
+
+<script type="text/javascript">
+  var accItem = document.getElementsByClassName('faq-item');
+  var accHD = document.getElementsByClassName('faq-accordion');
+  for (i = 0; i < accHD.length; i++) {
+    accHD[i].addEventListener('click', toggleItem, false);
+  }
+
+  function toggleItem() {
+    var itemClass = this.parentNode.className;
+    for (i = 0; i < accItem.length; i++) {
+      accItem[i].className = 'faq-item close';
+    }
+    if (itemClass == 'faq-item close') {
+      this.parentNode.className = 'faq-item open';
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "class": "index-section",
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAQs"
+    },
+    {
+      "type": "select",
+      "id": "headline_type",
+      "label": "Headline Type",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "CSS"
+    },
+    {
+      "type": "text",
+      "label": "Theme width class",
+      "id": "theme_width_class",
+      "info": "The page wrapper class of the theme. If there is more than one class, separate them by space(' ')."
+    },
+    {
+      "type": "textarea",
+      "label": "Custom CSS",
+      "id": "custom_css"
+    },
+    {
+      "type": "header",
+      "content": "SECTION PADDING"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faqs",
+      "name": "Buzzwoo FAQs",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Question"
+        },
+        {
+          "type": "select",
+          "id": "headline_type",
+          "label": "Headline Type",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ],
+          "default": "h3"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Add answer.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQs",
+      "category": "ADVANCED LAYOUT"
+    }
+  ]
+}
+{% endschema %}

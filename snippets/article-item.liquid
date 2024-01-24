@@ -1,0 +1,39 @@
+<article class="article-item" {% if block %}{{ block.shopify_attributes }}{% endif %}>
+    {%- if article.image != blank -%}
+      {%- assign image_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+      <a class="article-item__image" href="{{ article.url }}">
+        <img
+            srcset="{%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
+              {%- if article.image.src.width >= 360 -%}{{ article.image.src | image_url: width: 360 }} 360w,{%- endif -%}
+              {%- if article.image.src.width >= 533 -%}{{ article.image.src | image_url: width: 533 }} 533w,{%- endif -%}
+              {%- if article.image.src.width >= 720 -%}{{ article.image.src | image_url: width: 720 }} 720w,{%- endif -%}
+              {%- if article.image.src.width >= 1000 -%}{{ article.image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+              {%- if article.image.src.width >= 1500 -%}{{ article.image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+              {{ article.image.src | image_url }} {{ article.image.src.width }}w"
+            src="{{ article.image.src | image_url: width: 533 }}"
+            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+            alt="{{ article.image.src.alt | escape }}"
+            class="motion-reduce"
+            loading="lazy"
+            width="{{ article.image.width }}"
+            height="{{ article.image.height }}"
+          >
+      </a>
+    {%- endif -%}
+
+    <div class="article-item__content">
+      {%- if section.settings.show_category -%}
+        <span class="article-item__category">{{ article.tags.first }}</span>
+      {%- endif -%}
+
+      <h5 class="article-item__title">
+        <a href="{{ article.url }}" class="full-unstyled-link">{{ article.title }}</a>
+      </h5>
+
+      {%- unless template.name == 'article' -%}
+        <p class="article-item__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+        <a href="{{ article.url }}" class="article-item__link full-unstyled-link">Read more</a>
+      {%- endunless -%}
+    </div>
+  </article>

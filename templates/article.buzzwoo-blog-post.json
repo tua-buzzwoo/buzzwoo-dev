@@ -1,0 +1,204 @@
+{
+  "sections": {
+    "main": {
+      "type": "article-buzzwoo-blog-post",
+      "blocks": {
+        "4f21107d-6fdb-4a45-ad5d-e3399b346b61": {
+          "type": "breadcrumb",
+          "settings": {
+            "blog_breadcrumb": true,
+            "breadcrumbs_home": "Home",
+            "blog_pagination": true,
+            "previous_label": "Previous",
+            "next_label": "Next",
+            "font_size": "",
+            "padding_top": 0,
+            "padding_bottom": 50
+          }
+        },
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "show_title": true,
+            "title_size": "36px"
+          }
+        },
+        "author": {
+          "type": "author",
+          "settings": {
+            "show_author": true,
+            "show_date": false,
+            "font_size": "",
+            "padding_top": 0,
+            "padding_bottom": 70
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "font_size": "",
+            "padding_top": 0,
+            "padding_bottom": 50
+          }
+        },
+        "04d543f1-af63-4db1-8a1f-b8c045c85c53": {
+          "type": "image",
+          "settings": {
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "d2d23d17-ba5b-41e4-ac58-a0ee377f7c28": {
+          "type": "banner",
+          "settings": {
+            "headline": "Heading",
+            "headline_type": "h2",
+            "headline_style": "h2",
+            "headline_font_size": "",
+            "text": "<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. <\/p>",
+            "text_font_size": "",
+            "button_text": "Button Text",
+            "button_link": "",
+            "button_color": "",
+            "button_text_color": "",
+            "button_font_size": "",
+            "background": "#f3f3f3",
+            "image": "shopify:\/\/shop_images\/stabilizer-square_8ad0b7a9-6ca4-4cbc-932f-90759f2b1c06.jpg",
+            "image_position": "right",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "84e0be00-bdf7-41e8-9c3f-4ad47290c2d0": {
+          "type": "banner",
+          "settings": {
+            "headline": "Heading",
+            "headline_type": "h2",
+            "headline_style": "h2",
+            "headline_font_size": "",
+            "text": "<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. <\/p>",
+            "text_font_size": "",
+            "button_text": "Button Text",
+            "button_link": "",
+            "button_color": "",
+            "button_text_color": "",
+            "button_font_size": "",
+            "background": "#f1fbff",
+            "image": "shopify:\/\/shop_images\/Harmonizer_1500x1500px_Tile5_9f198d99-3824-4e46-8f5a-41c99db7102e.png",
+            "image_position": "left",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "a1f68328-6116-462e-997b-2c1e0fe9a61d": {
+          "type": "search",
+          "settings": {
+            "search_label": "Search...",
+            "show_endline": true
+          }
+        },
+        "0b8219ef-566c-41cb-8d7c-6603ce693ad3": {
+          "type": "newsletter",
+          "settings": {
+            "newsletter_title": "my News - Neuigkeiten, Angebote und Health Care Tipps",
+            "newsletter_text": "<p>Erhalte Neuigkeiten, Angebote und Health Care Tipps in deine Inbox. Werde teil der my Control Family.<\/p>",
+            "display_first_name": true,
+            "display_last_name": true,
+            "mailchimp_link": "",
+            "first_name_label": "First name",
+            "last_name_label": "Last name",
+            "email_label": "Enter your email address...",
+            "submit_button": "Sign Up",
+            "posted_successfully": "Thank you for joining our mailing list!",
+            "show_endline": true
+          }
+        },
+        "9feeae14-072f-4726-b635-b2255825c939": {
+          "type": "teaser-with-link",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/immune_boost_bundle_copy_64e24df7-196f-4c81-8a6d-55dbe51fadf6.jpg",
+            "title": "Your title",
+            "headline_font_size": "",
+            "content": "<p>Add your own custom content to give more information about your store, availability details...<\/p>",
+            "text_font_size": "",
+            "button_text": "Button text",
+            "button_link": "",
+            "button_color": "",
+            "button_text_color": "",
+            "button_font_size": "",
+            "show_endline": true
+          }
+        },
+        "f63b0723-6589-4593-a168-26d1a5b1f896": {
+          "type": "teaser-with-link",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Untitled_1200_x_1600_px.jpg",
+            "title": "Your title",
+            "headline_font_size": "",
+            "content": "<p>Add your own custom content to give more information about your store, availability details...<\/p>",
+            "text_font_size": "",
+            "button_text": "Button text",
+            "button_link": "",
+            "button_color": "",
+            "button_text_color": "",
+            "button_font_size": "",
+            "show_endline": true
+          }
+        },
+        "d3cc461a-2aa0-42f9-b7e7-5e9fd3345dcb": {
+          "type": "html",
+          "disabled": true,
+          "settings": {
+            "html_code": "<iframe src=\"https:\/\/www.youtube.com\/embed\/rgZU5pDf6mw\" title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen=\"\" width=\"100%\" height=\"420\" frameborder=\"0\"><\/iframe>",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "f791662b-fc1e-429d-b551-24c8ee273db7": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid_code": "<h3>{{article.title}}<\/h3>",
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        },
+        "b51b4347-7d20-4a9a-9cbc-b220ba702b1d": {
+          "type": "social-sharing",
+          "settings": {
+            "social_share_text": "Share this:",
+            "font_size": "",
+            "facebook": true,
+            "twitter": false,
+            "linkedin": false,
+            "email": true,
+            "padding_top": 50,
+            "padding_bottom": 50
+          }
+        }
+      },
+      "block_order": [
+        "4f21107d-6fdb-4a45-ad5d-e3399b346b61",
+        "featured_image",
+        "author",
+        "content",
+        "04d543f1-af63-4db1-8a1f-b8c045c85c53",
+        "d2d23d17-ba5b-41e4-ac58-a0ee377f7c28",
+        "84e0be00-bdf7-41e8-9c3f-4ad47290c2d0",
+        "a1f68328-6116-462e-997b-2c1e0fe9a61d",
+        "0b8219ef-566c-41cb-8d7c-6603ce693ad3",
+        "9feeae14-072f-4726-b635-b2255825c939",
+        "f63b0723-6589-4593-a168-26d1a5b1f896",
+        "d3cc461a-2aa0-42f9-b7e7-5e9fd3345dcb",
+        "f791662b-fc1e-429d-b551-24c8ee273db7",
+        "b51b4347-7d20-4a9a-9cbc-b220ba702b1d"
+      ],
+      "settings": {
+        "show_sidebar": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

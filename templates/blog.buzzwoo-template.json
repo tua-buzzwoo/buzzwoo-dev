@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "buzzwoo-blog-template",
+      "settings": {
+        "blog_overview_title": "All",
+        "blog_overview": "blog-overview",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

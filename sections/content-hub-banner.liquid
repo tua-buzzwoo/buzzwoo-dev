@@ -1,0 +1,179 @@
+<style>
+  #shopify-section--{{ section.id }}.content-hub-item.banner .col-content .content {
+    padding: 20px;
+  }
+  #shopify-section--{{ section.id }}.content-hub-item.banner .col-content .content .btn {
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+  }
+
+  #shopify-section--{{ section.id }}.content-hub-item.banner .col-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  {%- if section.settings.title_color -%}
+    #shopify-section--{{ section.id }}.content-hub-item.banner .col-content .content .headline {
+      color: {{ section.settings.title_color }};
+    }
+  {%- endif -%}
+
+  {%- if section.settings.text_color -%}
+    #shopify-section--{{ section.id }}.content-hub-item.banner .col-content .content .text {
+      color: {{ section.settings.text_color }};
+    }
+  {%- endif -%}
+  
+  @media screen and (min-width: 640px) {
+    #shopify-section--{{ section.id }}.content-hub-item.banner .col-content .content {
+      padding: 70px;
+    }
+  }
+</style>
+<div class="{{ section.settings.theme_width_class }}">
+  <div  id="shopify-section--{{ section.id }}" class="content-hub-item {% if section.settings.is_border %}border-item {% endif %} banner">
+    <div class="row" style="background-color: {{ section.settings.background }};">
+      <div class="col col-content">
+        <div class="content">
+  
+          <{{section.settings.heading_tag}} class="{{ section.settings.headline_style }} headline">
+            {{ section.settings.headline }}
+          </{{section.settings.heading_tag}}>
+  
+          <div class="text">
+            {{ section.settings.text }}
+          </div>
+  
+          {% if section.settings.button_text != blank %}
+            <a href="{{ section.settings.button_link }}" class="btn border--button btn-rounded font-size--l" title="{{ section.settings.button_text }}">{{ section.settings.button_text }}</a>
+          {% endif %}
+  
+        </div>
+      </div>
+      {% if section.settings.image %}
+        <div class="col col-img {{ section.settings.image_position }}" style="background-image:url('{{ section.settings.image | image_url }}');">&nbsp;</div>
+      {% else %}
+        <div class="col col-img {{ section.settings.image_position }}">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+  "name": "Content Hub CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Heading",
+      "default": "Heading"
+    }, {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        }, {
+          "value": "h2",
+          "label": "H2"
+        }, {
+          "value": "h3",
+          "label": "H3"
+        }, {
+          "value": "h4",
+          "label": "H4"
+        }, {
+          "value": "h5",
+          "label": "H5"
+        }, {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h2"
+    }, {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    }, {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    }, {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }, {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }, {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        }, {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    }, {
+      "type": "header",
+      "content": "Custom Styling"
+    }, {
+      "type": "text",
+      "label": "Theme width class",
+      "id": "theme_width_class",
+      "info": "The page wrapper class of the theme. If there is more than one class, separate them by space(' ').",
+      "default": "page-width"
+    }, {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color"
+    }, {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color"
+    }, {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "transparent"
+    }, {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#fff"
+    }, {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#000"
+    }, {
+      "type": "checkbox",
+      "id": "is_border",
+      "label": "Border",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Hub CTA",
+      "settings": {}
+    }
+  ],
+  "templates": ["article"]
+}
+
+{% endschema %}

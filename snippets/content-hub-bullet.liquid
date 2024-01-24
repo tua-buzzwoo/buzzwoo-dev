@@ -1,0 +1,34 @@
+<style>
+  .content-hub-item.bullet.block-{{ index }} {
+    background: {{ block.settings.background_color }};
+    padding-top: {{ block.settings.top_spacing }}px;
+    padding-bottom: {{ block.settings.bottom_spacing }}px;
+  }
+
+  {% if block.settings.title_color %}
+    .content-hub-item.bullet.block-{{ index }} .heading {
+      color: {{ block.settings.title_color }};
+    }
+  {% endif %}
+  
+  {% if block.settings.text_color %}  
+  .content-hub-item.bullet.block-{{ index }} ul li {
+    color: {{ block.settings.text_color }};
+    }
+  {% endif %}
+
+</style>
+
+<div class="content-hub-item bullet block-{{ index }} {% if block.settings.is_border %}border-item{% endif %}">
+  <{{block.settings.heading_tag}} class="{{ block.settings.headline_style }} heading">
+    {{ block.settings.headline }}
+  </{{block.settings.heading_tag}}>
+  <ul>
+    {% for i in (1..8) %}
+    {% capture setting_name %}bullet_{{i}}{% endcapture %}
+      {% if block.settings[setting_name] != blank %}
+        <li>{{ block.settings[setting_name] }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
