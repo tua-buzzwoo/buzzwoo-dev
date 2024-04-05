@@ -3,6 +3,23 @@
     "164734266795a5d840": {
       "type": "content-hub",
       "blocks": {
+        "product_slider_4tFGJw": {
+          "type": "product_slider",
+          "settings": {
+            "anchor": "",
+            "heading": "Products",
+            "heading_tag": "h3",
+            "product_1": "example-hat",
+            "product_2": "example-pants",
+            "product_3": "example-t-shirt",
+            "product_4": "floral-shape",
+            "product_5": "",
+            "product_6": "",
+            "product_7": "",
+            "product_8": "",
+            "product_text_color": "#fff"
+          }
+        },
         "8f9ac534-1651-4254-b897-e70ea2ce3258": {
           "type": "content",
           "settings": {
@@ -15,6 +32,9 @@
             "is_quote": false,
             "quote_style": "1",
             "quote_color": "#000000",
+            "heading_color": "transparent",
+            "sub_heading_color": "transparent",
+            "text_color": "transparent",
             "background": "rgba(0,0,0,0)",
             "is_border": false
           }
@@ -31,6 +51,9 @@
             "is_quote": true,
             "quote_style": "1",
             "quote_color": "#000000",
+            "heading_color": "transparent",
+            "sub_heading_color": "transparent",
+            "text_color": "transparent",
             "background": "rgba(0,0,0,0)",
             "is_border": false
           }
@@ -47,6 +70,9 @@
             "is_quote": true,
             "quote_style": "2",
             "quote_color": "#000000",
+            "heading_color": "transparent",
+            "sub_heading_color": "transparent",
+            "text_color": "transparent",
             "background": "rgba(0,0,0,0)",
             "is_border": false
           }
@@ -54,6 +80,8 @@
         "6cbb5d5b-2de4-408d-85b5-350c051f44ac": {
           "type": "bullet",
           "settings": {
+            "headline": "Heading",
+            "heading_tag": "h2",
             "bullet_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "bullet_2": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla quis lorem ut libero malesuada feugiat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
             "bullet_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
@@ -61,7 +89,13 @@
             "bullet_5": "",
             "bullet_6": "",
             "bullet_7": "",
-            "bullet_8": ""
+            "bullet_8": "",
+            "title_color": "",
+            "text_color": "",
+            "background_color": "",
+            "top_spacing": 0,
+            "bottom_spacing": 0,
+            "is_border": false
           }
         },
         "a8053443-5f0d-47bf-a600-4972eba6d2fb": {
@@ -74,6 +108,8 @@
           "type": "image",
           "settings": {
             "anchor": "image",
+            "link": "",
+            "target_blank": false,
             "text": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.",
             "text_align": "center"
           }
@@ -111,7 +147,10 @@
             "text": "",
             "newsletter_code": "",
             "background": "#f3f3f3",
-            "is_border": false
+            "is_border": false,
+            "label": "Email",
+            "button_label": "Subscribe",
+            "success": "Thanks for subscribing"
           }
         },
         "cf1b061c-9818-4776-b3cd-314327ef89bd": {
@@ -138,7 +177,6 @@
             "heading_color": "",
             "title_color": "",
             "text_color": "",
-            "border_color": "#000000",
             "background": "rgba(0,0,0,0)",
             "link_text": "Mehr erfahren",
             "link_color": "#000000",
@@ -173,7 +211,8 @@
             "text_5": "",
             "text_6": "",
             "text_7": "",
-            "text_8": ""
+            "text_8": "",
+            "image_height": 0
           }
         },
         "4a5328c8-3567-4c70-900e-6c1af71cb6f7": {
@@ -185,6 +224,7 @@
         }
       },
       "block_order": [
+        "product_slider_4tFGJw",
         "8f9ac534-1651-4254-b897-e70ea2ce3258",
         "d66fa52c-cd23-4198-9130-fde45c8bdcd5",
         "19dc7e9b-5cda-4b07-a1e9-761d4bb41e03",
@@ -202,6 +242,7 @@
       "settings": {
         "menu_title": "Inhaltsübersicht",
         "menu": "main-menu",
+        "menu_title_color": "transparent",
         "menu_background_color": "rgba(0,0,0,0)",
         "menu_text_color": "#000000",
         "menu_active_color": "#fafafa",
@@ -210,6 +251,9 @@
         "is_border": false,
         "padding_top": false,
         "padding_bottom": true,
+        "border_color": "#000",
+        "border_thickness": 1,
+        "border_radius": 0,
         "theme_width_class": "page-width",
         "custom_css": ""
       }
@@ -228,11 +272,13 @@
         "button_text": "",
         "button_link": "",
         "image_position": "right",
+        "theme_width_class": "page-width",
+        "title_color": "",
+        "text_color": "",
         "background": "rgba(0,0,0,0)",
         "button_text_color": "#ffffff",
         "button_color": "#000000",
-        "is_border": false,
-        "is_rounded": false
+        "is_border": false
       }
     }
   },
