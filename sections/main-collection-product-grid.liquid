@@ -30,7 +30,7 @@
 {{ collection.metafields.custom.collection_sidebar }}
 {{ collection.metafields.custom.collection_sidebar.metaobjects.collection }}
 
-{% for sidebar in collection.metafields.custom.collection_sidebar %}
+{% for sidebar in collection.metafields.custom.collection_sidebar.metaobjects.collection %}
   <p>{{ sidebar }}</p>
 {% endfor %}
 
