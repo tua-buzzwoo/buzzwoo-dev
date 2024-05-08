@@ -27,9 +27,10 @@
 {%- endstyle -%}
 
 
-{{ collection.metafields.custom.collection_sidebar }}
+{{ collection.metafields.custom.collection_sidebar.metaobjects }}
+{{ collection.metafields.custom.collection_sidebar.metaobjects }}
 
-{% for sidebar in collection.metafields.custom.collection_sidebar.values %}
+{% for sidebar in collection.metafields.custom.collection_sidebar.metaobjects %}
   <p>{{ sidebar.collection.name }}</p>
 {% endfor %}
 
