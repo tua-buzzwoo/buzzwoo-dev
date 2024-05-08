@@ -27,10 +27,10 @@
 {%- endstyle -%}
 
 
-{{ collection.metafields.custom.collection_sidebar | json }}
+{{ collection.metafields.custom.collection_sidebar }}
 
 {% for sidebar in collection.metafields.custom.collection_sidebar %}
-  <p>{{ sidebar | json }}</p>
+  <p>{{ sidebar.collection.name }}</p>
 {% endfor %}
 
 
