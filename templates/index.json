@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "image_banner": {
@@ -20,11 +29,19 @@
             "button_link_2": "",
             "button_style_secondary_2": false
           }
+        },
+        "text_pbBXyz": {
+          "type": "text",
+          "settings": {
+            "text": "Newly created homepage",
+            "text_style": "body"
+          }
         }
       },
       "block_order": [
         "heading",
-        "button"
+        "button",
+        "text_pbBXyz"
       ],
       "custom_css": [
         ".text-primary {color: red; \/* TEST *\/}"
